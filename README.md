@@ -5,8 +5,8 @@
  * 1) From credentials_template.py, create credentials.py with your ssid, authtoken, trialphone from twilio account.
 
 * 2) Manage all your verified phone numbers in your twilio account.
-Then add me = yourphonenumber
-somebodyelse = someonephonenumber
+
+Then add me = yourphonenumber or somebodyelse = someonephonenumber
 
 Et voilà !
 
