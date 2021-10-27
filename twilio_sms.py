@@ -2,14 +2,16 @@ from twilio.rest import Client
 import random
 from tkinter import *
 from tkinter import messagebox
+# import from external file 
 from credentials_template import *
 
+# or enter here your credentials
 # ssid = ""
 # authtoken = ""
 # phonetocall = ""
 # trialphone = ""
 
-text = "C'est Jean Je t'envoie un SMS en python depuis Twilio pour test !"
-#phonetocall = karim  # le numéro doit d'abord être vérifié dans twilio (Verified phone numbers)
+text = "This is me ! Hello World"
+#phonetocall = karim  # must be a verified phone numbers in your twilio account
 client = Client(ssid,authtoken)
 client.messages.create(to =[phonetocall], from_ =trialphone, body = text)
