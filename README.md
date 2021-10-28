@@ -17,6 +17,16 @@ you can import or change phonetocall as you want
 
 ### C) OPT with tkinter GUI 
 
+Check OPT with tkinter_opt.py
+
 The trialnumber wil send an  one-time password (OPT) to your phonetocal. The OTP is a number with 4 digits.
 
 The phonetocall receiver then has to open verification GUI with tkinter_opt.py and check in the number to log in.
+
+### D) Login calling opt validation 
+
+Login and OPT validation with tkinter_opt_login.py
+
+A first window let you enter your login name which will set varaible phonetocal.
+
+A validation OPT window will be opened to check authentication by sending OPT to the login name phone.
