@@ -6,7 +6,9 @@
 
 * 2) Manage all your verified phone numbers in your twilio account.
 
-Then add me = yourphonenumber or somebodyelse = someonephonenumber
+Then make a dictionary : 
+
+  tels {'me' : 'yourphonenumber', 'somebodyelse' : 'someonephonenumber'}
 
 Et voilà !
 
