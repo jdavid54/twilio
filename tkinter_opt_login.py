@@ -2,7 +2,7 @@ from twilio.rest import Client
 import random
 from tkinter import *
 from tkinter import messagebox
-from credentials import *     # first create credentials.py from credentials_template.py
+from credentials_template import *     # first create credentials.py from credentials_template.py
 
 class login_form(Tk):  # first window
     def __init__(self):
@@ -21,9 +21,16 @@ class login_form(Tk):  # first window
         self.submitButton=Button(self, image=self.submitButtonImage, command=self.checkOTP, border=0)
         self.submitButton.place(x=250, y=240)
         
+    def get_phone2call(self,login):
+        print('Login:',login)
+        if login=='me': phonetocall=me
+        if login=='somebodyelse': phonetocall=somebodyelse
+        print(phonetocall)
+    
     def checkOTP(self):
         self.userInput=self.User_Name.get(1.0, "end-1c")
-        print(self.userInput)
+        #print(self.userInput)
+        self.get_phone2call(self.userInput)
         window2 = otp_verifier()                
 
 class otp_verifier(Toplevel): # a second window must be a subclass of Toplevel and not Tk
@@ -65,9 +72,10 @@ class otp_verifier(Toplevel): # a second window must be a subclass of Toplevel a
         try:
             self.userInput=int(self.User_Name.get(1.0, "end-1c"))
             if self.userInput==self.n:
+                self.quit()
                 messagebox.showinfo("showinfo", "Login success")
                 self.n = "logged"
-                self.quit()
+                
             elif self.n == "logged":
                 messagebox.showinfo("showinfo", "You are already logged in")
             else:
@@ -81,7 +89,7 @@ class otp_verifier(Toplevel): # a second window must be a subclass of Toplevel a
         self.n=random.randint(10000,99999)
         self.client=Client(ssid,authtoken)
         self.client.messages.create(to =[phonetocall], from_ =trialphone, body = self.n)
-        print('OTP=',self.n)
+        print('OTP = ',self.n)
 
     def quit(self):
         #print('quit')
