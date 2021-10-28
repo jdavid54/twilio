@@ -7,24 +7,23 @@ from credentials_template import *     # first create credentials.py from creden
 class login_form(Tk):  # first window
     def __init__(self):
         super().__init__()
-        self.geometry('600x500')
+        self.geometry('400x200')
         self.resizable(False, False)
         self.Entry()
         self.Buttons()
      
     def Entry(self): #, hightlightthickness=0,
         self.User_Name=Text(self, borderwidth=2, wrap="word", width=29, height=2)
-        self.User_Name.place(x=190, y=160)
+        self.User_Name.place(x=90, y=50)
         
     def Buttons(self):
         self.submitButtonImage=PhotoImage(file="submit.png")
         self.submitButton=Button(self, image=self.submitButtonImage, command=self.checkOTP, border=0)
-        self.submitButton.place(x=250, y=240)
+        self.submitButton.place(x=150, y=100)
         
     def get_phone2call(self,login):
         print('Login:',login)
-        if login=='me': phonetocall=me
-        if login=='somebodyelse': phonetocall=somebodyelse
+        phonetocall=tels[self.userInput]
         print(phonetocall)
     
     def checkOTP(self):
