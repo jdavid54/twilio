@@ -4,6 +4,9 @@ from tkinter import *
 from tkinter import messagebox
 from credentials_template import *     # first create credentials.py from credentials_template.py
 
+# send OTP or not
+do_it = False
+
 class login_form(Tk):  # first window
     def __init__(self):
         super().__init__()
@@ -27,8 +30,7 @@ class login_form(Tk):  # first window
         print(phonetocall)
     
     def checkOTP(self):
-        self.userInput=self.User_Name.get(1.0, "end-1c")
-        #print(self.userInput)
+        self.userInput=self.User_Name.get(1.0, "end-1c").strip()
         self.get_phone2call(self.userInput)
         window2 = otp_verifier()                
 
@@ -38,9 +40,10 @@ class otp_verifier(Toplevel): # a second window must be a subclass of Toplevel a
         self.geometry('600x500')
         self.resizable(False, False)
         self.n=random.randint(10000,99999)
-        print('OTP =',self.n)
-        #self.client=Client(ssid,authtoken)
-        #self.client.messages.create(to =[phonetocall], from_ =trialphone, body = self.n)
+        print('OTP sent to',phonetocall,' =',self.n)
+        if do_it:            
+            self.client=Client(ssid,authtoken)
+            self.client.messages.create(to =[phonetocall], from_ =trialphone, body = self.n)
         
         self.Labels()
         self.Entry()
@@ -53,7 +56,7 @@ class otp_verifier(Toplevel): # a second window must be a subclass of Toplevel a
         self.Login_Title=Label(self, text="OTP Verification", font="bold, 20",bg="white")
         self.Login_Title.place(x=210,y=90)
     
-    def Entry(self): #, hightlightthickness=0,
+    def Entry(self): 
         self.User_Name=Text(self, borderwidth=2, wrap="word", width=29, height=2)
         self.User_Name.place(x=190, y=160)
 
@@ -73,8 +76,7 @@ class otp_verifier(Toplevel): # a second window must be a subclass of Toplevel a
             if self.userInput==self.n:
                 self.quit()
                 messagebox.showinfo("showinfo", "Login success")
-                self.n = "logged"
-                
+                self.n = "logged"                
             elif self.n == "logged":
                 messagebox.showinfo("showinfo", "You are already logged in")
             else:
@@ -86,17 +88,16 @@ class otp_verifier(Toplevel): # a second window must be a subclass of Toplevel a
     def resendOTP(self):
         #print('<<resend')
         self.n=random.randint(10000,99999)
-        self.client=Client(ssid,authtoken)
-        self.client.messages.create(to =[phonetocall], from_ =trialphone, body = self.n)
-        print('OTP = ',self.n)
-
+        print('OTP sent to',phonetocall,' =',self.n)
+        if do_it:
+            self.client=Client(ssid,authtoken)
+            self.client.messages.create(to =[phonetocall], from_ =trialphone, body = self.n)
+            
+    # close window if login success
     def quit(self):
         #print('quit')
         self.destroy() 
 
 if __name__ == "__main__":
-    #root = Tk()
-    #window = Toplevel(root)
-    #window = otp_verifier(root)
     window = login_form()
     window.mainloop()
